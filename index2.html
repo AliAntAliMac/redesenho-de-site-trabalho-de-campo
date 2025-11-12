@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CartaRedesign — Feed de Artigos</title>
+  <meta name="description"
+    content="Redesenho do site Carta de Moçambique — feed de artigos com busca, ordenação e CRUD (localStorage).">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+
+    <header class="site-header" role="banner">
+
+
+
+      <!--  <a class="brand" href="#" id="homeLink">CartaRedesign</a> -->
+
+      <div class="controls" role="navigation" aria-label="Controles">
+
+        <div class="searchbox">
+
+          <span class="btnSecondaryBegin">inicio</span>
+          <span class="btnSecondaryBegin">Sobre nos</span>
+          <span class="btnSecondaryBegin">Estatuto Editoral</span>
+          <span class="btnSecondaryBegin">Projecto de Investigação</span>
+          <span class="btnSecondaryBegin">Como Anunciar</span>
+
+          <input id="q" type="search" placeholder="Pesquisar por título, categoria ou texto"
+            aria-label="Pesquisar artigos">
+          <select id="sort" aria-label="Ordenar artigos">
+            <option value="date-desc">Mais recentes</option>
+            <option value="date-asc">Mais antigos</option>
+            <option value="title-asc">Título A → Z</option>
+          </select>
+        </div>
+        <button class="btn" id="btnAdd">+ Adicionar artigo</button>
+      </div>
+
+      <br>
+
+    </header>
+    <div class="blue">
+      <span>Carta de Moçambique</span>
+
+    </div> <br>
+    <div class="menuPrincipal">
+      <span>Crime</span>
+      <span>Politica</span>
+      <span>Enconomia e Negocios</span>
+      <span>Projecto </span>
+      <span>Como Anunciar</span>
+    </div>
+    <div class="img1">
+      <img src="D:\apredizado\projecto\BCI_2025_Abril_OrelhasdoPortal_387X350_B-1 (1).webp" alt="sem imagem" >
+    </div>
+    <main>
+      <section class="feed" id="feed" aria-live="polite" aria-label="Feed de artigos">
+        <!-- Cards dynamically renderizados aqui -->
+      </section>
+
+      <aside class="panel" aria-labelledby="filtros" role="region" hidden>
+        <h4 id="filtros">Filtros & Ações</h4>
+        <div class="form-row">
+          <label for="catFilter">Categoria</label>
+          <select id="catFilter" aria-label="Filtrar por categoria">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Contagem de artigos</label>
+          <div id="count" class="muted">0 artigos</div>
+        </div>
+        <div class="form-row">
+          <label> </label>
+          <textarea id="jsonBlob" rows="6" placeholder=' ' aria-label="JSON import export"></textarea>
+          <div class="actions">
+            <button class="btn secondary" id="btnExport">Exportar</button>
+            <button class="btn secondary" id="btnImport">Importar</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <small class="muted">Dica: usa o botão "Adicionar artigo" para criar registos; os dados ficam no seu browser
+            (localStorage).</small>
+        </div>
+      </aside>
+    </main>
+
+    <footer style="margin-top:1rem;text-align:center;color:var(--muted)">Redesenho para projeto académico — Exemplos e
+      demonstração local</footer>
+  </div>
+
+  <!-- Template card (hidden) -->
+  <template id="cardTpl">
+    <article class="card" tabindex="0">
+      <img class="card-img" alt="imagem do artigo" loading="lazy">
+      <div class="card-body">
+        <h3 class="card-title"></h3>
+        <p class="card-excerpt"></p>
+        <div class="card-meta">
+          <time class="card-date"></time>
+          <span class="card-cat tag"></span>
+        </div>
+        <div class="actions">
+          <button class="btn secondary btnView">Ver</button>
+          <button class="btn secondary btnEdit">Editar</button>
+          <button class="btn secondary btnDelete" style="color:var(--danger);border-color:#ffdede">Remover</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <!-- Modal (visualizar / form) -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <div class="modal-header">
+        <h3 id="modalTitle">Visualizar</h3>
+        <div class="flex">
+          <button class="btn secondary" id="modalClose">Fechar</button>
+        </div>
+      </div>
+      <div id="modalBody" style="margin-top:.6rem"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
